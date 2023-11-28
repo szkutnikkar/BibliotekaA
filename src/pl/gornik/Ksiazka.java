@@ -33,10 +33,9 @@ class Ksiazka {
 
     @Override
     public String toString() {
-        return "Ksiazka{" +
-                "tytul='" + tytul + '\'' +
-                ", autor='" + autor + '\'' +
-                ", iloscDostepnych=" + iloscDostepnych +
-                '}';
+        return "Ksiazka: " +
+                " tytul: " + tytul + '\'' +
+                " autor: " + autor + '\''
+               ;
     }
 }

@@ -11,29 +11,34 @@ import java.util.Scanner;
 public class Uczen {
     private String imie;
     private String nazwisko;
+
+    private String klasa;
     private List<Ksiazka> koszyk;
     Scanner scanner = new Scanner(System.in);
 
-    public Uczen(String imie, String nazwisko) {
+    public Uczen(String imie, String nazwisko, String klasa) {
         this.imie = imie;
         this.nazwisko = nazwisko;
+        this.klasa = klasa;
         this.koszyk = new ArrayList<>();
     }
 
-    public void dodajDoKoszyka(Ksiazka ksiazka, int ilosc) {
+    public void dodajDoKoszyka(Ksiazka ksiazka, int ilosc, Biblioteka biblioteka) {
+        // Sprawdzenie dostępności przed dodaniem do koszyka
+        int dostepnaIlosc = ksiazka.getIloscDostepnych();
+        if (ilosc > dostepnaIlosc) {
+            System.out.println("Przepraszamy, dostepna jest tylko ilosc " + dostepnaIlosc + " egzemplarzy.");
+            System.out.println("Podaj ilosc egzemplarzy do wypozyczenia:");
+            int nowaIloscPoprawiona = scanner.nextInt();
+            dodajDoKoszyka(ksiazka, nowaIloscPoprawiona, biblioteka);
+            return;
+        }
+
         boolean znaleziono = false;
 
         for (Ksiazka koszykKsiazka : koszyk) {
             if (koszykKsiazka.getTytul().equals(ksiazka.getTytul())) {
-                int dostepnaIlosc = ksiazka.getIloscDostepnych() - koszykKsiazka.getIloscDostepnych();
-                if (ilosc <= dostepnaIlosc) {
-                    koszykKsiazka.setIloscDostepnych(koszykKsiazka.getIloscDostepnych() + ilosc);
-                } else {
-                    System.out.println("Przepraszamy, dostepna jest tylko ilosc " + dostepnaIlosc + " egzemplarzy.");
-                    System.out.println("Podaj ilosc egzemplarzy do wypozyczenia:");
-                    int nowaIloscPoprawiona = scanner.nextInt();
-                    dodajDoKoszyka(ksiazka, nowaIloscPoprawiona);
-                }
+                koszykKsiazka.setIloscDostepnych(koszykKsiazka.getIloscDostepnych() + ilosc);
                 znaleziono = true;
                 break;
             }
@@ -46,15 +51,19 @@ public class Uczen {
 
         System.out.println(getImie() + " " + getNazwisko() + " dodal(a) " + ilosc +
                 " egzemplarzy ksiazki do koszyka: " + ksiazka.getTytul());
+
+        // Aktualizacja dostępności w bibliotece tylko jeśli książka nie istnieje w koszyku
+        if (!znaleziono) {
+            biblioteka.zmniejszIloscDostepnych(ksiazka, ilosc);
+        }
     }
 
     public void wyswietlKoszyk() {
         System.out.println("Koszyk " + getImie() + " " + getNazwisko() + ":");
         for (Ksiazka ksiazkaWKoszyku : koszyk) {
-            System.out.println(ksiazkaWKoszyku);
+            System.out.println(ksiazkaWKoszyku + ", ilość w koszyku: " + ksiazkaWKoszyku.getIloscDostepnych());
         }
     }
-
     public String getImie() {
         return imie;
     }
@@ -69,6 +78,9 @@ public class Uczen {
 
     public void setNazwisko(String nazwisko) {
         this.nazwisko = nazwisko;
+    }
+    public String getKlasa() {
+        return klasa;
     }
 
     public List<Ksiazka> getKoszyk() {
