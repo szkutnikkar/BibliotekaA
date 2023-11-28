@@ -38,7 +38,7 @@ public class Main {
         Uczen uczen = znajdzUcznia(imie, nazwisko, klasa);
 
         if (uczen == null) {
-            System.out.println("Uczeń o podanym imieniu i nazwisku nie istnieje. Zamykam program.");
+            System.out.println("Uczeńn o podanym imieniu i nazwisku nie istnieje. Zamykam program.");
             return;  // Zakończ program, jeśli uczeń nie istnieje
         }
 
