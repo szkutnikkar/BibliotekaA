@@ -1,5 +1,8 @@
 package pl.gornik;
 
+import pl.gornik.model.Biblioteka;
+import pl.gornik.model.Ksiazka;
+import pl.gornik.model.Uczen;
 
 import java.util.HashMap;
 import java.util.Map;

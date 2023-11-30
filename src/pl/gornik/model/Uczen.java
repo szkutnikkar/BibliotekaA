@@ -1,8 +1,9 @@
-package pl.gornik;
+package pl.gornik.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+
+
+import pl.gornik.model.Biblioteka;
+import pl.gornik.model.Ksiazka;
 
 import java.util.ArrayList;
 import java.util.List;

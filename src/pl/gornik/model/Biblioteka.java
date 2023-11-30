@@ -1,10 +1,11 @@
-package pl.gornik;
+package pl.gornik.model;
+
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-class Biblioteka {
+public class Biblioteka {
     private List<Ksiazka> ksiazki;
 
     public Biblioteka() {
