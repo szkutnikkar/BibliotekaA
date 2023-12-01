@@ -24,21 +24,22 @@ public class Uczen {
         this.koszyk = new ArrayList<>();
     }
 
-    public void dodajDoKoszyka(Ksiazka ksiazka, int ilosc, Biblioteka biblioteka) {
-        // Sprawdzenie dostępności przed dodaniem do koszyka
-        int dostepnaIlosc = ksiazka.getIloscDostepnych();
+
+
+    public void dodajDoKoszyka(Produkt produkt, int ilosc, Biblioteka biblioteka) {
+        int dostepnaIlosc = produkt.getIloscDostepnych();
         if (ilosc > dostepnaIlosc) {
             System.out.println("Przepraszamy, dostepna jest tylko ilosc " + dostepnaIlosc + " egzemplarzy.");
             System.out.println("Podaj ilosc egzemplarzy do wypozyczenia:");
             int nowaIloscPoprawiona = scanner.nextInt();
-            dodajDoKoszyka(ksiazka, nowaIloscPoprawiona, biblioteka);
+            dodajDoKoszyka(produkt, nowaIloscPoprawiona, biblioteka);
             return;
         }
 
         boolean znaleziono = false;
 
         for (Ksiazka koszykKsiazka : koszyk) {
-            if (koszykKsiazka.getTytul().equals(ksiazka.getTytul())) {
+            if (koszykKsiazka.getTytul().equals(produkt.getTytul())) {
                 koszykKsiazka.setIloscDostepnych(koszykKsiazka.getIloscDostepnych() + ilosc);
                 znaleziono = true;
                 break;
@@ -46,16 +47,16 @@ public class Uczen {
         }
 
         if (!znaleziono) {
-            Ksiazka ksiazkaWKoszyku = new Ksiazka(ksiazka.getTytul(), ksiazka.getAutor(), ilosc);
+            Ksiazka ksiazkaWKoszyku = new Ksiazka(produkt.getTytul(), produkt.getAutor(), ilosc);
             koszyk.add(ksiazkaWKoszyku);
         }
 
-        System.out.println(getImie() + " " + getNazwisko() + " dodal(a) " + ilosc +
-                " egzemplarzy ksiazki do koszyka: " + ksiazka.getTytul());
+        System.out.println(getImie() + " " + getNazwisko() + " dodal " + ilosc +
+                " egzemplarzy do koszyka: " + produkt.getTytul());
 
-        // Aktualizacja dostępności w bibliotece tylko jeśli książka nie istnieje w koszyku
+
         if (!znaleziono) {
-            biblioteka.zmniejszIloscDostepnych(ksiazka, ilosc);
+            biblioteka.zmniejszIloscDostepnych(produkt, ilosc);
         }
     }
 
@@ -65,6 +66,7 @@ public class Uczen {
             System.out.println(ksiazkaWKoszyku + ", ilość w koszyku: " + ksiazkaWKoszyku.getIloscDostepnych());
         }
     }
+
     public String getImie() {
         return imie;
     }

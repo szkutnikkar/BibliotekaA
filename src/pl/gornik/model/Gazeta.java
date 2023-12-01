@@ -1,11 +1,12 @@
 package pl.gornik.model;
 
-public class Ksiazka extends Produkt {
-    public Ksiazka(String tytul, String autor, int iloscDostepnych) {
+public class Gazeta extends Produkt {
+    private String autor;
+    public Gazeta(String tytul, String autor, int iloscDostepnych) {
         super(tytul, autor, iloscDostepnych);
     }
 
-    public Ksiazka(String tytul, int iloscDostepnych) {
+    public Gazeta(String tytul, int iloscDostepnych) {
         super(tytul,iloscDostepnych);
     }
 
@@ -14,7 +15,7 @@ public class Ksiazka extends Produkt {
     }
 
     public String getAutor() {
-        return super.getAutor();
+        return (autor != null) ? autor : "Nieznany";
     }
 
     public int getIloscDostepnych() {
@@ -32,4 +33,3 @@ public class Ksiazka extends Produkt {
                 " autor: " + getAutor() + '\'';
     }
 }
-

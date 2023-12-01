@@ -3,51 +3,52 @@ package pl.gornik.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Biblioteka {
-    private List<Ksiazka> ksiazki;
+    private List<Produkt> produkty;
 
     public Biblioteka() {
-        this.ksiazki = new ArrayList<>();
+        this.produkty = new ArrayList<>();
     }
 
-    public void dodajKsiazke(Ksiazka ksiazka) {
-        ksiazki.add(ksiazka);
+    public void dodajProdukt(Produkt produkt) {
+        produkty.add(produkt);
     }
 
-    public List<Ksiazka> getKsiazki() {
-        return ksiazki;
+    public List<Produkt> getProdukty() {
+        return produkty;
     }
 
-    public void wyswietlKsiazki(List<Ksiazka> koszyk) {
-        System.out.println("Dostepne ksiazki:");
-        for (Ksiazka ksiazka : ksiazki) {
-            System.out.println(ksiazka + ", ilosc dostepnych: " + ksiazka.getIloscDostepnych());
+    public void wyswietlProdukty() {
+        System.out.println("Dostępne produkty:");
+        for (Produkt produkt : produkty) {
+            System.out.println(produkt + ", ilość dostępnych: " + produkt.getIloscDostepnych());
         }
     }
 
-    public void zmniejszIloscDostepnych(Ksiazka ksiazka, int ilosc) {
-        for (Ksiazka ksiazkaMagazyn : ksiazki) {
-            if (ksiazkaMagazyn.getTytul().equals(ksiazka.getTytul())) {
-                int nowaIlosc = ksiazkaMagazyn.getIloscDostepnych() - ilosc;
-                ksiazkaMagazyn.setIloscDostepnych(nowaIlosc);
+    public void zmniejszIloscDostepnych(Produkt produkt, int ilosc) {
+        for (Produkt produktMagazyn : produkty) {
+            if (produktMagazyn.getTytul().equals(produkt.getTytul())) {
+                int nowaIlosc = produktMagazyn.getIloscDostepnych() - ilosc;
+                produktMagazyn.setIloscDostepnych(nowaIlosc);
 
-                // Usuń książkę z listy, jeśli jej dostępność osiągnie 0
                 if (nowaIlosc == 0) {
-                    ksiazki.remove(ksiazkaMagazyn);
-                    System.out.println("Ksiazka '" + ksiazkaMagazyn.getTytul());
+                    produkty.remove(produktMagazyn);
+                    System.out.println("Produkt " + produktMagazyn.getTytul());
                 }
                 break;
             }
         }
     }
-    public Ksiazka znajdzKsiazke(String nazwa) {
-        for (Ksiazka ksiazka : ksiazki) {
-            if (ksiazka.getTytul().equalsIgnoreCase(nazwa)) {
-                return ksiazka;
+
+    public Produkt znajdzProdukt(String nazwa) {
+        for (Produkt produkt : produkty) {
+            if (produkt.getTytul().equalsIgnoreCase(nazwa)) {
+                return produkt;
             }
         }
         return null;
     }
+
+
 }
