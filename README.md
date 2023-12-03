@@ -1,4 +1,7 @@
-# BibliotekaA
-Ten kod działa na zasadzie wprowadzenia pierw do terminala swoich danych po czym kod sprawdzi czy jesteś na liście uczniów, jesli tak zostaniesz dopuszczony do wypozeczenia książki
-jesli nie jesteś na liście uczniów kod zakończy sie. Wypozyczanie ksiazek działa na zasadzie KOSZYKA, czyli uczen pierw wyswietla sobie liste ksiazek dostępnych do wypozyczenia
-po czym wybiera jedną z nich i podaje ilosc jaką chce wypozyczyc.
+# Biblioteka Szkolna
+To jest prosty program symulujący system biblioteczny dla uczniów. Aplikacja umożliwia przeglądanie dostępnych produktów, dodawanie ich do koszyka oraz sprawdzanie zawartości koszyka przed zakończeniem zakupów.
+Umożliwia:
+Przeglądanie dostępnych produktów, takich jak książki i gazety, z informacjami o tytule, autorze i dostępnej ilości.
+Dodawanie produktów do koszyka, podając nazwę produktu i ilość egzemplarzy do wypożyczenia.
+Wyświetlanie zawartości koszyka przed zakończeniem zakupów, pokazując ilość egzemplarzy każdego produktu w koszyku.
+Zakończenie zakupów.
