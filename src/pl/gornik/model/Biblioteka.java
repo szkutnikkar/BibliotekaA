@@ -2,6 +2,7 @@ package pl.gornik.model;
 
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Biblioteka {
@@ -15,10 +16,6 @@ public class Biblioteka {
         produkty.add(produkt);
     }
 
-    public List<Produkt> getProdukty() {
-        return produkty;
-    }
-
     public void wyswietlProdukty() {
         System.out.println("Dostępne produkty:");
         for (Produkt produkt : produkty) {
@@ -27,14 +24,18 @@ public class Biblioteka {
     }
 
     public void zmniejszIloscDostepnych(Produkt produkt, int ilosc) {
-        for (Produkt produktMagazyn : produkty) {
-            if (produktMagazyn.getTytul().equals(produkt.getTytul())) {
-                int nowaIlosc = produktMagazyn.getIloscDostepnych() - ilosc;
-                produktMagazyn.setIloscDostepnych(nowaIlosc);
+        Iterator<Produkt> iterator = produkty.iterator();
+
+        while (iterator.hasNext()) {
+            Produkt produktWKoszyku = iterator.next();
+
+            if (produktWKoszyku.equals(produkt)) {
+                int nowaIlosc = produktWKoszyku.getIloscDostepnych() - ilosc;
+                produktWKoszyku.setIloscDostepnych(nowaIlosc);
 
                 if (nowaIlosc == 0) {
-                    produkty.remove(produktMagazyn);
-                    System.out.println("Produkt " + produktMagazyn.getTytul());
+                    iterator.remove();
+                    System.out.println("Produkt " + produktWKoszyku.getTytul() + " został wypożyczony.");
                 }
                 break;
             }
@@ -49,6 +50,4 @@ public class Biblioteka {
         }
         return null;
     }
-
-
 }
